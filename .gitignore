@@ -1,0 +1,17 @@
+node_modules/
+native/*.exe
+outputs/
+dist/
+*.log
+*.zip
+.env
+.env.*
+settings.json
+*.pem
+*.key
+*.pfx
+.DS_Store
+Thumbs.db
+.npmrc
+*.pdb
+.cache/

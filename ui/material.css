@@ -1,0 +1,54 @@
+:root {
+  --moro-glass:rgba(24,24,28,var(--glass-tint,.4));
+  --moro-glass-filter:blur(var(--glass-blur,18px)) saturate(1.9);
+  --moro-icon:#ededf2;
+  --moro-rim:inset 0 1px 0 #ffffff12;
+}
+.goo-material {
+  background:var(--moro-glass);
+  backdrop-filter:var(--moro-glass-filter);
+  -webkit-backdrop-filter:var(--moro-glass-filter);
+}
+#moro-ui .apple-controls,#moro-ui .goo-popover,#moro-ui .video-settings,#native-status {
+  background:var(--moro-glass);
+  backdrop-filter:var(--moro-glass-filter);
+  -webkit-backdrop-filter:var(--moro-glass-filter);
+}
+#moro-ui.player > #native-close,#moro-ui #video-settings-close,#moro-ui .goo-popover .goo-panel-close,.goo-panel-close {
+  position:relative;
+  background:var(--moro-glass);
+  color:var(--moro-icon);
+  backdrop-filter:var(--moro-glass-filter);
+  -webkit-backdrop-filter:var(--moro-glass-filter);
+  box-shadow:var(--moro-rim);
+}
+#moro-ui.player > #native-close:hover,#moro-ui.player > #native-close:active,#moro-ui #video-settings-close:hover,#moro-ui #video-settings-close:active,#moro-ui .goo-popover .goo-panel-close:hover,#moro-ui .goo-popover .goo-panel-close:active,.goo-panel-close:hover,.goo-panel-close:active {
+  background:var(--moro-glass);
+  color:var(--moro-icon);
+}
+/* A button inside glass borrows its parent's material. Tinting it again
+   makes the same close control look darker than a standalone close. */
+#moro-ui :is(.goo-popover .goo-panel-close,.video-settings #video-settings-close),.goo-popover .goo-panel-close {
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.goo-panel-close::before,#video-settings-close::before,#native-close::before {
+  content:"";position:absolute;inset:0;border-radius:inherit;background:transparent;
+  pointer-events:none;transition:background .15s ease;
+}
+.goo-control::before,.goo-control.main::before {
+  inset:0;border:0;box-shadow:var(--moro-rim);
+}
+.goo-control[aria-expanded=true]::before {background:transparent;border:0}
+.goo-control:hover::before,.goo-panel-close:hover::before,#video-settings-close:hover::before,#native-close:hover::before {background:#ffffff0d;border:0}
+.goo-control:active::before,.goo-panel-close:active::before,#video-settings-close:active::before,#native-close:active::before {background:#ffffff20;border:0}
+.goo-control {color:var(--moro-icon)!important}
+#moro-ui #apple-settings {color:var(--moro-icon)}
+#moro-ui #goo-toggle>svg,#moro-ui .goo-wrap.open #goo-toggle>svg {
+  width:19px;height:19px;fill:currentColor;stroke:none;transform:none;
+}
+#moro-ui.player > #native-close svg,#moro-ui #video-settings-close svg,#moro-ui .goo-popover .goo-panel-close svg,.goo-panel-close svg {
+  position:relative;display:block;width:14px!important;height:14px!important;
+  fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+}

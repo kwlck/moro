@@ -1,0 +1,26 @@
+{
+  "name": "moro",
+  "productName": "Moro",
+  "version": "0.1.9",
+  "description": "A small floating video player for Windows",
+  "private": true,
+  "main": "main.js",
+  "author": "Moro",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "npm run build:native && electron .",
+    "test": "node --test test/*.test.js",
+    "smoke": "npm run build:native && electron . --smoke-test --report outputs/smoke",
+    "build:native": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/build-native.ps1",
+    "package": "npm run build:native && electron-packager . Moro --platform=win32 --arch=x64 --out=dist --asar.unpack=**/native/*.exe --icon=assets/moro.ico --ignore=^/test --ignore=^/tools --ignore=^/README.md --ignore=^/dist --ignore=^/outputs --ignore=^/.git --ignore=^/.github",
+    "build:ui": "python tools/build-ui.py"
+  },
+  "devDependencies": {
+    "electron": "44.5.1",
+    "@electron/packager": "20.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kwlck/moro.git"
+  }
+}

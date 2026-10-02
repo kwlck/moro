@@ -1,0 +1,109 @@
+html,body {width:100%;height:100%;margin:0;overflow:hidden;background:transparent!important;overscroll-behavior:none}
+html {clip-path:inset(0 round var(--window-radius,18px));color-scheme:dark}
+#moro-host {position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-width:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;box-sizing:border-box!important;transform:none!important;pointer-events:none;z-index:2147483647}
+body {border-radius:var(--window-radius,18px);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#eee;user-select:none}
+/* Electron 44 inherits app-region; explicit `none` also emits a no-drag
+   rectangle. `initial` keeps full-window ancestors out of native regions. */
+body {app-region:initial;-webkit-app-region:initial;opacity:1;transition:opacity .16s ease}
+#moro-host,#moro-ui {app-region:initial;-webkit-app-region:initial}
+body.moro-passive-hover {opacity:var(--hover-opacity,.82)!important}
+#moro-drag-surface {position:fixed!important;inset:0!important;z-index:2147483646!important;pointer-events:auto;app-region:drag;-webkit-app-region:drag}
+#moro-ui .apple-controls,#moro-ui .video-settings,#native-close,button,input,a,select,textarea,[role=button],.ytp-ad-skip-button-container,.ytp-ad-overlay-container {app-region:no-drag;-webkit-app-region:no-drag}
+#moro-ui .goo-wrap {app-region:no-drag;-webkit-app-region:no-drag}
+#moro-host>svg {position:absolute;width:0;height:0;pointer-events:none}
+#demo-video {width:100%;height:100%;object-fit:cover;display:block;background:#171719;border-radius:inherit}
+#empty {position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;background:#19191b;border-radius:inherit}
+#empty strong {font-size:15px;font-weight:500;letter-spacing:-.02em}#empty span {font-size:12px;color:#aaa}
+#empty[hidden]{display:none}
+/* The underlying video and the overlay share one compositor, so tint includes video colour. */
+#moro-ui.player {position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-width:0!important;max-width:none!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;box-sizing:border-box!important;border:0!important;border-radius:var(--window-radius,18px)!important;background:transparent!important;box-shadow:none!important;transform:none!important;will-change:auto;pointer-events:none;z-index:2147483640;container-type:inline-size;outline:none;overflow:hidden;touch-action:none}
+#moro-ui * {box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+#moro-ui button,#moro-ui input {font:inherit}
+#moro-ui .apple-controls {display:flex!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;font-size:12px;line-height:normal}
+#moro-ui.ctrl-held.hover .apple-controls {opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translate(-50%,0) scale(1)!important;transition-delay:0s}
+#moro-ui:not(.ctrl-held) .apple-controls,#moro-ui:not(.ctrl-held) .goo-wrap,#moro-ui:not(.ctrl-held) .video-settings,#moro-ui:not(.ctrl-held) > #native-close {opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+#moro-ui.player.ctrl-held.hover.menu-open .apple-controls,#moro-ui.player.ctrl-held.hover.goo-open .apple-controls,body.moro-dragging #moro-ui.player.ctrl-held.hover .apple-controls {opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+body.moro-empty #moro-ui .apple-controls {display:none!important}
+#moro-ui .video-settings {pointer-events:auto;font-size:12px;line-height:normal;max-height:calc(100% - 24px);width:260px}
+#moro-ui .video-settings h3 {margin:6px 7px;font-size:10px;font-weight:600;color:#d0d0d7}
+#moro-ui #video-settings-close {display:flex;align-items:center;justify-content:center;flex:none;width:26px;height:26px;margin:0;padding:0;border:0;border-radius:50%;background:#ffffff0c;color:#dedee4}
+#moro-ui #video-settings-close:hover {background:#ffffff20;color:#fff}
+#moro-ui #video-settings-close svg {display:block;width:13px;height:13px}
+#moro-ui .native-options {display:flex;gap:4px;flex-wrap:wrap;padding:2px 5px 5px}
+#moro-ui .native-options button {font-size:11px;min-height:29px;padding:5px 9px;border:0;border-radius:8px;background:#ffffff0c;color:#eee;cursor:pointer}
+#moro-ui .native-options button:hover {background:#ffffff24}#moro-ui .native-options button[aria-pressed=true] {background:#ffffff30;box-shadow:inset 0 0 0 1px #ffffff22}
+#moro-ui .native-options span {font-size:11px;color:#bdbdc5;padding:4px 0}
+#moro-ui.player > #native-close {position:absolute!important;inset:12px 12px auto auto!important;display:flex!important;align-items:center;justify-content:center;width:30px!important;height:30px!important;margin:0!important;padding:0!important;transform:none!important;z-index:20;border:0;border-radius:50%;background:rgba(32,32,36,calc(var(--glass-tint,.4) + .2));color:#ededf2;backdrop-filter:blur(var(--glass-blur,18px)) saturate(1.7);box-shadow:inset 0 1px 0 #ffffff12;pointer-events:none;opacity:0;transition:opacity .18s ease,background .15s ease}
+#moro-ui.player > #native-close:hover {background:rgba(48,48,52,calc(var(--glass-tint,.4) + .2))}
+#moro-ui.player > #native-close:active {background:rgba(64,64,68,calc(var(--glass-tint,.4) + .2))}
+#moro-ui.player > #native-close svg {width:14px!important;height:14px!important;display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+#moro-ui .apple-icon svg,#moro-ui .video-settings-head svg {fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+#moro-ui #apple-settings svg {fill:currentColor;stroke:none}
+#moro-ui #apple-play {display:flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:#ffffff1b;color:#e7e7ec}
+#moro-ui #apple-play svg {width:18px;height:18px;flex:none;fill:currentColor;stroke:none;transform:none!important}
+#moro-ui #apple-play svg * {stroke:none}
+#moro-ui #apple-play:hover {background:#ffffff2c}#moro-ui #apple-play:disabled {opacity:.4;cursor:default}
+#moro-ui #apple-play .pause-shape {display:none}#moro-ui #apple-play.playing .pause-shape {display:block}#moro-ui #apple-play.playing .play-shape {display:none}
+#moro-ui #apple-progress,#moro-ui #apple-volume {appearance:none;-webkit-appearance:none;background:none!important;border:0;outline:none;padding:0;height:24px;margin:0;vertical-align:middle}
+#moro-ui #apple-progress::-webkit-slider-runnable-track {height:4px;border-radius:999px;background:linear-gradient(to right,#e1e1e7 var(--played,0%),#ffffff2b var(--played,0%))}
+#moro-ui #apple-volume::-webkit-slider-runnable-track {height:4px;border-radius:999px;background:linear-gradient(to right,#e1e1e7 var(--volume,70%),#ffffff2b var(--volume,70%))}
+#moro-ui #apple-progress::-webkit-slider-thumb,#moro-ui #apple-volume::-webkit-slider-thumb {appearance:none;-webkit-appearance:none;width:10px;height:10px;margin-top:-3px;border:0;border-radius:50%;background:#e8e8ec;box-shadow:0 1px 3px #0003}
+#moro-ui .apple-skip text {fill:currentColor;stroke:none}
+#moro-ui.player.ctrl-held.hover > #native-close {opacity:1;pointer-events:auto}
+#moro-ui.player.ctrl-held.hover.menu-open > #native-close,body.moro-dragging #moro-ui.player.ctrl-held.hover > #native-close {opacity:0;pointer-events:none}
+#moro-ui button:focus-visible,#moro-ui input:focus-visible {outline:0;box-shadow:0 0 0 2px #ffffff80}
+#moro-ui .apple-time {font-variant-numeric:tabular-nums}
+#moro-ui .video-settings:not([hidden]) {animation:moro-menu-in .2s cubic-bezier(.16,1,.3,1) both}
+@keyframes moro-menu-in {from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+/* The launcher becomes an in-video fan rooted in the transport's … button. */
+#moro-ui .goo-wrap {display:block!important;position:absolute;left:calc(var(--anchor-x,400px) - 120px)!important;top:calc(var(--anchor-y,200px) - 130px)!important;bottom:auto!important;width:240px;height:160px;transform:none!important;z-index:16;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .16s ease,visibility 0s .28s}
+#moro-ui .goo-wrap.open {--goo-time:420ms}
+#moro-ui.goo-open .goo-wrap {opacity:1;visibility:visible;transition-delay:0s}
+#moro-ui.goo-open .apple-controls {opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translate(-50%,0) scale(1)!important}
+#moro-ui .goo-control {left:102px;bottom:12px;display:grid;place-items:center;width:36px;height:36px;margin:0;padding:0;border:0;border-radius:50%;background:transparent;line-height:normal}
+#moro-ui .goo-control.main {left:101px;bottom:11px;width:38px;height:38px}
+#moro-ui .goo-control>svg {width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+#moro-ui .goo-wrap.open .goo-control.sub.a,#moro-host .goo-node.one.is-open {transform:translate(-72px,-2px)}
+#moro-ui .goo-wrap.open .goo-control.sub.b,#moro-host .goo-node.two.is-open {transform:translate(-52px,-48px)}
+#moro-ui .goo-wrap.open .goo-control.sub.c,#moro-host .goo-node.three.is-open {transform:translate(-4px,-78px)}
+#moro-ui .goo-tooltip {font-size:11px;line-height:1.3;left:auto!important;right:calc(100% + 8px)!important;top:50%!important;bottom:auto!important;transform:translate(0,-50%)!important}
+#moro-ui .goo-control.main .goo-tooltip {display:none}
+#moro-ui .goo-popover {position:fixed!important;inset:12px 12px auto auto!important;width:min(330px,calc(100vw - 24px))!important;max-height:calc(100vh - 24px)!important;transform:none!important;padding:12px;font-size:12px;line-height:normal;background:rgba(24,24,28,var(--glass-tint,.4));backdrop-filter:blur(var(--glass-blur,18px)) saturate(1.9);border-radius:16px;app-region:no-drag;-webkit-app-region:no-drag;overscroll-behavior:contain;scrollbar-color:#ffffff40 transparent}
+#moro-ui .goo-popover:not([hidden]) {animation:moro-menu-in .2s cubic-bezier(.16,1,.3,1) both}
+#moro-ui .goo-url-head,#moro-ui .goo-settings-head {position:relative;z-index:2;flex:none;padding:4px 0 9px;margin-bottom:5px;background:transparent;backdrop-filter:none;border-radius:0}
+#moro-ui .goo-settings-panel:not([hidden]) {display:flex;flex-direction:column;overflow:hidden}
+#moro-ui .goo-settings-body {min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#ffffff40 transparent}
+#moro-ui .goo-settings-body::-webkit-scrollbar {width:4px}
+#moro-ui .goo-settings-body::-webkit-scrollbar-thumb {border-radius:999px;background:#ffffff40}
+#moro-ui .goo-panel-title {margin:0;font-size:12px;line-height:26px}
+#moro-ui .goo-settings-controls {gap:12px 14px}
+#moro-ui .goo-settings-panel .control-top {font-size:11px;line-height:1.3}
+#moro-ui .goo-popover button,#moro-ui .goo-popover input {color:#eee}
+#moro-ui .goo-url-row input {font-size:12px;user-select:text}
+#moro-ui .goo-url-row button {width:40px;height:40px}
+#moro-ui .goo-panel-actions button {display:flex;align-items:center;gap:5px;padding:6px 8px;font-size:11px;min-height:28px}
+#moro-ui .goo-panel-actions svg {width:12px;height:12px}
+#moro-ui .goo-panel-close {width:26px;height:26px;padding:0;border:0;border-radius:50%;background:#ffffff0c}
+#moro-ui #video-settings-close,#moro-ui .goo-panel-close {background:rgba(32,32,36,calc(var(--glass-tint,.4) + .2));backdrop-filter:blur(var(--glass-blur,18px)) saturate(1.7);box-shadow:inset 0 1px 0 #ffffff12}
+#moro-ui .goo-tooltip {display:none!important}
+#moro-ui .goo-panel-close svg {width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.7}
+#moro-ui .goo-reset {font-size:10px}
+#moro-ui .goo-wrap.panel-open .goo-layer,#moro-ui .goo-wrap.panel-open .goo-control {opacity:0;pointer-events:none;visibility:hidden}
+#moro-ui.player.ctrl-held.hover:has(.goo-wrap.panel-open) > #native-close {opacity:0;pointer-events:none}
+#moro-ui .goo-settings-panel .control input[type=range] {width:100%;height:20px;background:none!important;appearance:none;border:0;border-radius:10px}
+#moro-ui .goo-settings-panel input[type=range]::-webkit-slider-runnable-track {height:2px;border-radius:99px;background:linear-gradient(to right,#dedee3 var(--fill,40%),#ffffff2a var(--fill,40%))}
+#moro-ui .goo-settings-panel input[type=range]::-webkit-slider-thumb {appearance:none;width:10px;height:10px;margin-top:-4px;border:0;background:#e4e4e9;border-radius:50%}
+@media(prefers-reduced-motion:reduce){#moro-ui .goo-wrap,#moro-ui .goo-node,#moro-ui .goo-control {transition:none!important}#moro-ui .goo-popover:not([hidden]){animation:none}}
+#native-status {position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);max-width:85%;padding:10px 14px;border-radius:14px;background:rgba(24,24,28,var(--glass-tint,.4));backdrop-filter:blur(var(--glass-blur,18px)) saturate(1.9);box-shadow:0 8px 22px #0004,inset 0 1px 0 #ffffff16;text-align:center;font-size:12px;line-height:1.5;color:#ededf2;text-shadow:0 1px 3px #0006;pointer-events:none}
+#native-status[hidden]{display:none}
+/* Replace transport chrome, retain YouTube's errors, ads, consent and playback content. */
+html:has(#moro-host):has(#movie_player) #player,html:has(#moro-host):has(#movie_player) #player-container,html:has(#moro-host) #movie_player {position:fixed!important;inset:0!important;width:100%!important;height:100%!important;border-radius:var(--window-radius,18px)!important;overflow:hidden!important;background:#171719!important}
+html:has(#moro-host):has(#movie_player) video {object-fit:contain!important;border-radius:var(--window-radius,18px)!important}
+html:has(#moro-host) .ytp-chrome-bottom,html:has(#moro-host) .ytp-chrome-top,html:has(#moro-host) .ytp-gradient-bottom,html:has(#moro-host) .ytp-gradient-top,html:has(#moro-host) .ytp-large-play-button,html:has(#moro-host) .ytp-settings-menu {display:none!important}
+html:has(#moro-host) .player-controls-content,html:has(#moro-host) .watch-page-progress-bar {display:none!important}
+body.moro-youtube #movie_player {font-family:"Segoe UI",sans-serif}
+body.moro-dragging {cursor:grabbing!important}
+@media(prefers-reduced-motion:reduce){#moro-ui .apple-controls,#native-close{transition:none}#moro-ui .video-settings:not([hidden]){animation:none}}
+
+/* A fixed panel width keeps the size slider in the same place at every video size. */
+#moro-ui .goo-settings-panel {width:min(296px,calc(100vw - 24px))!important}
