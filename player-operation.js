@@ -17,8 +17,14 @@ function playerOperation(action,value) {
     if(value&&!(local?v.textTracks.length:captionsAvailable()))return {ok:false,message:"Subtitles are unavailable for this video"};
     setCaptions(value);return {ok:true};
   }
+  if(action==='stop'){if(local){v.pause();v.removeAttribute('src');v.load();}else p?.stopVideo?.();return {ok:true};}
+  if(action==='restore'){
+    if(local){v.volume=value.volume/100;v.muted=value.muted;if(value.time)v.currentTime=value.time;}
+    else{if(!p?.setVolume)return {ok:false};p.setVolume(value.volume);value.muted||value.volume===0?p.mute():p.unMute();if(value.time)p.seekTo(Math.min(value.time,p.getDuration()||value.time),true);if(value.play)p.playVideo();}
+    return {ok:true};
+  }
   if(action==='demo') {
-    v.src=value.src;v.muted=true;v.volume=.7;v.dataset.quality='540';v.play().catch(()=>{});
+    v.src=value.src;v.muted=value.muted??true;v.volume=(value.volume??30)/100;v.dataset.quality='540';v.play().catch(()=>{});
     document.getElementById('empty').hidden=true;document.body.classList.remove('moro-empty');return true;
   }
   if(action==='state') {
@@ -27,7 +33,8 @@ function playerOperation(action,value) {
     if(!p?.getPlayerState)return {kind:'youtube',ready:false,qualities:[],audio:[],captionsAvailable:false,captions:false,error:''};
     const audio=tracks().map(t=>{const info=t.getLanguageInfo?.()||t.To||t;return {id:trackId(t),name:String(info.getName?.()||info.name||t.displayName||info.displayName||trackId(t))};}).filter(t=>t.id);
     const error=document.querySelector('.ytp-error-content-wrap')?.innerText||'';
-    return {kind:'youtube',ready:!!p.getDuration?.(),time:p.getCurrentTime?.()||0,duration:p.getDuration?.()||0,playing:p.getPlayerState()===1,muted:p.isMuted?.()||false,volume:p.getVolume?.()??70,rate:p.getPlaybackRate?.()||1,quality:p.getPlaybackQuality?.()||'auto',qualities:p.getAvailableQualityLevels?.()||[],audio,audioId:trackId(p.getAudioTrack?.()),captionsAvailable:captionsAvailable(),captions:!document.body.classList.contains('moro-captions-off')&&!!p.isSubtitlesOn?.(),error:error.slice(0,300)};
+    const data=p.getVideoData?.()||{};
+    return {kind:'youtube',videoId:data.video_id||'',title:data.title||'',ended:p.getPlayerState()===0,live:data.isLive===true,ready:!!p.getDuration?.(),time:p.getCurrentTime?.()||0,duration:p.getDuration?.()||0,playing:p.getPlayerState()===1,muted:p.isMuted?.()||false,volume:p.getVolume?.()??70,rate:p.getPlaybackRate?.()||1,quality:p.getPlaybackQuality?.()||'auto',qualities:p.getAvailableQualityLevels?.()||[],audio,audioId:trackId(p.getAudioTrack?.()),captionsAvailable:captionsAvailable(),captions:!document.body.classList.contains('moro-captions-off')&&!!p.isSubtitlesOn?.(),error:error.slice(0,300)};
   }
   if(!local&&!p?.getPlayerState)return {ok:false,message:'The player is still loading'};
   if(action==='play')local?(v.paused?v.play().catch(()=>{}):v.pause()):(p.getPlayerState()===1?p.pauseVideo():p.playVideo());

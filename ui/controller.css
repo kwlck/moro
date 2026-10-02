@@ -45,3 +45,23 @@ button:focus-visible,input:focus-visible {outline:0;box-shadow:0 0 0 2px #ffffff
 .edge-launcher .goo-wrap.open .goo-control.sub.b,.edge-launcher .goo-node.two.is-open {transform:translate(-52px,-48px)}
 .edge-launcher .goo-wrap.open .goo-control.sub.c,.edge-launcher .goo-node.three.is-open {transform:translate(-4px,-78px)}
 .edge-launcher .goo-control,.edge-launcher .goo-layer {display:none!important}
+
+/* History replaces the link form inside the same compact popover. */
+.goo-url-panel {overflow-y:auto;overscroll-behavior:contain}
+.goo-url-actions {display:flex;align-items:center;gap:4px}
+.history-toggle {display:grid;place-items:center;width:28px;height:28px;padding:5px;border:0;border-radius:50%;background:transparent;color:inherit;cursor:pointer}
+.history-toggle svg {width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.history-back,.history-open .history-clock {display:none}
+.history-open .history-back {display:block}
+.history-open .goo-url-form,.history-open .goo-demo,.history-section[hidden] {display:none}
+.history-section {padding:6px 7px;border-radius:10px;background:rgba(17,17,20,.68)}
+.history-actions {display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 4px;font-size:11px;color:#e2e2e8}
+.history-clear {min-height:28px;padding:3px 8px;border:0;border-radius:8px;background:#ffffff0c;color:inherit;font:inherit;cursor:pointer}
+.history-clear:disabled {opacity:.4;cursor:default}
+.history-list {max-height:min(164px,calc(100vh - 124px));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#ffffff40 transparent}
+.history-entry {display:block;width:100%;min-height:46px;padding:8px 7px;border:0;border-radius:9px;background:transparent;color:#f2f2f6;font:inherit;text-align:left;cursor:pointer}
+.history-entry:hover,.history-clear:hover,.history-toggle:hover {background:#ffffff12}
+.history-title {display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:500;line-height:1.4}
+.history-detail {display:block;margin-top:3px;font-size:11px;line-height:1.4;color:#dfdfe5;font-variant-numeric:tabular-nums}
+.history-empty {margin:8px 7px;font-size:12px;line-height:1.5;color:#dfdfe5}
+.history-entry:focus-visible,.history-toggle:focus-visible,.history-clear:focus-visible {outline:0;box-shadow:inset 0 0 0 2px #ffffff80}

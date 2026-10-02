@@ -8,7 +8,7 @@ A floating YouTube player for Windows. Keep a video visible while you work in ot
 
 **Windows 10/11 x64.**
 
-1. Download the **[Windows installer](https://github.com/kwlck/moro/releases/download/v0.1.14/Moro-0.1.14-Setup.exe)**.
+1. Download the **[Windows installer](https://github.com/kwlck/moro/releases/download/v0.1.15/Moro-0.1.15-Setup.exe)**.
 2. Open it and click **Install → Finish**. Leave **Launch Moro — YouTube PiP** selected.
 3. Paste a YouTube link into the form and press **Enter**.
 
@@ -22,7 +22,8 @@ The installer creates a shortcut. No administrator rights or extra runtime insta
 - **Click underneath:** release Ctrl. Clicks pass through to the app below the video.
 - **Settings:** hold Ctrl and open **…** to change video quality, audio, subtitles, or window appearance.
 - **Add another video:** click the Moro system tray icon or reopen the shortcut.
-- **Hide the video:** use the top-right **×** or the tray menu. To exit the app, choose **Quit Moro** in the tray menu.
+- **Close the video:** use the top-right **×** or **Close video** in the tray menu. Playback stops and the video is unloaded. To exit the app, choose **Quit Moro** in the tray menu.
+- **History:** open the link form, then select the clock button to browse recent videos. Select a video to continue watching, or choose **Clear** to erase the history.
 
 ## Screenshots
 
@@ -39,6 +40,8 @@ The installer creates a shortcut. No administrator rights or extra runtime insta
 - Video quality and audio selection when available for the video.
 - Subtitles on/off, with your preference saved between videos and launches.
 - Smooth resizing and magnetic snapping to screen edges and alignment points.
+- Saved volume and mute preferences, restored before sound is enabled.
+- Resume playback from the last position when reopening a video.
 
 ## Window settings
 
@@ -56,7 +59,7 @@ To remove an installed copy, open Windows **Settings → Apps** and uninstall **
 
 Moro uses YouTube's embedded player. Available video qualities and audio tracks depend on the video. Videos that restrict embedding may not play.
 
-Moro has no built-in analytics and requires no API key. Playback connects to YouTube and its media services. Your settings and browser/session data are stored locally on your computer.
+Moro has no built-in analytics and requires no API key. Playback connects to YouTube and its media services. Your settings, watch history, and browser/session data are stored locally on your computer. History contains up to 50 videos from the past 30 days and can be cleared from the link form. Completed videos reopen from the beginning. New installations start at 30% volume; later launches use your saved volume and mute preference.
 
 The Windows downloads are unsigned. Moro is an independent app and is not affiliated with YouTube or Apple.
 

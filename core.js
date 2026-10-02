@@ -1,8 +1,8 @@
 'use strict';
-const defaults = Object.freeze({ width:460,radius:18,opacity:96,hoverFade:18,magnet:76,response:60,bounce:0,goo:10,tint:40,blur:18,captions:true,gooPinned:false,gooX:null,gooY:null });
-const ranges = {width:[320,960],radius:[8,42],opacity:[75,100],hoverFade:[0,90],magnet:[0,128],response:[20,100],bounce:[0,24],goo:[4,16],tint:[20,80],blur:[4,36]};
+const defaults = Object.freeze({"width":610,"radius":26,"opacity":100,"hoverFade":28,"magnet":76,"response":60,"bounce":0,"goo":10,"tint":20,"blur":4,"captions":false,"volume":30,"muted":false,"gooPinned":false,"gooX":null,"gooY":null});
+const ranges = {volume:[0,100],width:[320,960],radius:[8,42],opacity:[75,100],hoverFade:[0,90],magnet:[0,128],response:[20,100],bounce:[0,24],goo:[4,16],tint:[20,80],blur:[4,36]};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-function sanitizeSettings(input={}) {const result={...defaults};for(const [key,[a,b]] of Object.entries(ranges))if(Number.isFinite(input[key]))result[key]=clamp(input[key],a,b);if(typeof input.captions==='boolean')result.captions=input.captions;result.gooPinned=input.gooPinned===true;for(const key of ['gooX','gooY'])if(Number.isFinite(input[key]))result[key]=clamp(input[key],-100000,100000);return result;}
+function sanitizeSettings(input={}) {const result={...defaults};for(const [key,[a,b]] of Object.entries(ranges))if(Number.isFinite(input[key]))result[key]=clamp(input[key],a,b);if(typeof input.muted==='boolean')result.muted=input.muted;if(typeof input.captions==='boolean')result.captions=input.captions;result.gooPinned=input.gooPinned===true;for(const key of ['gooX','gooY'])if(Number.isFinite(input[key]))result[key]=clamp(input[key],-100000,100000);return result;}
 function parseYouTube(raw) {
   if(typeof raw!=='string'||raw.length>2048)return null;
   try {const u=new URL(raw.trim());if(!['https:','http:'].includes(u.protocol)||u.username||u.password)return null;

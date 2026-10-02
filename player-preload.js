@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
   const call=async(action,value)=>{try{const r=await ipcRenderer.invoke('moro:player-action',action,value);if(r?.message)message(r.message);return r;}catch{message('The player is still loading. Please try again.');}};
   const control=async(action,value)=>{try{const r=await ipcRenderer.invoke('moro:control',action,value);if(r?.message)message(r.message);return r;}catch{message('Could not complete the action. Please try again.');}};
   function layoutGoo(){const r=$('apple-settings').getBoundingClientRect();ui.style.setProperty('--anchor-x',r.x+r.width/2+'px');ui.style.setProperty('--anchor-y',r.y+r.height/2+'px');}
-  function closePanels(){$('goo-url-panel').hidden=true;$('goo-settings-panel').hidden=true;$('goo-link').setAttribute('aria-expanded','false');$('goo-settings-toggle').setAttribute('aria-expanded','false');goo.classList.remove('panel-open');}
+  function closePanels(){$('goo-url-panel').hidden=true;setHistoryOpen(false);$('goo-settings-panel').hidden=true;$('goo-link').setAttribute('aria-expanded','false');$('goo-settings-toggle').setAttribute('aria-expanded','false');goo.classList.remove('panel-open');}
   function toggleGoo(open=!ui.classList.contains('goo-open'),focus=false){if(open){menu(false);layoutGoo();}ui.classList.toggle('goo-open',open);goo.classList.toggle('open',open);goo.setAttribute('aria-hidden',String(!open));$('goo-toggle').setAttribute('aria-expanded',String(open));$('goo-toggle').setAttribute('aria-label',open?'Close controls':'Open controls');document.documentElement.style.setProperty('--goo-time',open?'420ms':'280ms');host.querySelectorAll('.goo-node').forEach(n=>n.classList.toggle('is-open',open));goo.querySelectorAll('.sub').forEach(b=>b.tabIndex=open?0:-1);$('goo-toggle').tabIndex=open?0:-1;$('apple-settings').setAttribute('aria-expanded',String(open));$('apple-settings').setAttribute('aria-label','Controls');if(!open){closePanels();if(goo.contains(document.activeElement))document.activeElement.blur();}else if(focus)$('goo-toggle').focus({preventScroll:true});}
   function panel(name){const p=$('goo-'+name+'-panel'),open=p.hidden;closePanels();toggleGoo(true);p.hidden=!open;goo.classList.toggle('panel-open',open);$(name==='url'?'goo-link':'goo-settings-toggle').setAttribute('aria-expanded',String(open));if(open)requestAnimationFrame(()=>name==='url'?$('url').focus():p.querySelector('input').focus());}
   function videoSettings(){toggleGoo(false);menu(true);}
@@ -29,6 +29,27 @@ window.addEventListener('DOMContentLoaded',async()=>{
   $('goo-video-toggle').onclick=$('goo-video-settings').onclick=videoSettings;
   $('url-panel-close').onclick=$('settings-panel-close').onclick=()=>{closePanels();$('goo-toggle').focus({preventScroll:true});};
   $('url-form').onsubmit=async e=>{e.preventDefault();const help=$('url-help');help.classList.remove('error');const r=await control('load',$('url').value);if(r?.ok)toggleGoo(false);else{help.textContent=r?.message||'Enter a link to a specific YouTube video';help.classList.add('error');}};
+
+  async function refreshHistory(action='history'){
+    const result=await control(action);if(!result?.ok)return;
+    const list=$('history-list');list.replaceChildren();$('history-clear').disabled=!result.history.length;
+    if(!result.history.length){const empty=document.createElement('p');empty.className='history-empty';empty.textContent="Videos you watch will appear here.";list.append(empty);return;}
+    for(const item of result.history){
+      const button=document.createElement('button');button.type='button';button.className='history-entry';button.dataset.video=item.id;
+      const title=document.createElement('span');title.className='history-title';title.textContent=item.title||"YouTube video";
+      const detail=document.createElement('span');detail.className='history-detail';const time=Math.floor(item.position),position=`${Math.floor(time/60)}:${String(time%60).padStart(2,'0')}`;
+      detail.textContent=(time>=3&&(item.duration<=0||time<item.duration-5)?"Resume at "+position:"From the start")+' · '+new Intl.DateTimeFormat("en-US",{month:'short',day:'numeric'}).format(item.updatedAt);
+      button.append(title,detail);button.onclick=async()=>{button.disabled=true;const opened=await control('load','https://www.youtube.com/watch?v='+item.id);if(opened?.ok)toggleGoo(false);else button.disabled=false;};list.append(button);
+    }
+  }
+  function setHistoryOpen(open){
+    $('history-section').hidden=!open;$('goo-url-panel').classList.toggle('history-open',open);
+    $('url-panel-title').textContent=open?'History':'Open video';
+    $('history-toggle').setAttribute('aria-label',open?'Back to link':'History');$('history-toggle').setAttribute('aria-expanded',String(open));
+  }
+  $('history-toggle').onclick=async()=>{const open=$('history-section').hidden;setHistoryOpen(open);if(open)await refreshHistory();};
+  $('history-clear').onclick=()=>refreshHistory('history-clear');
+
   $('goo-demo').onclick=()=>{toggleGoo(false);control('demo');};
   for(const [id,action]of Object.entries({'goo-center':'center','move-monitor':'monitor','player-close':'clear','quit-app':'quit'}))$(id).onclick=()=>{toggleGoo(false);control(action);};
   $('reset-settings').onclick=()=>control('reset');
@@ -68,19 +89,19 @@ window.addEventListener('DOMContentLoaded',async()=>{
   $('apple-mute').onclick=()=>call('mute');$('apple-volume').oninput=e=>{e.target.style.setProperty('--volume',e.target.value+'%');call('volume',+e.target.value);};
   $('apple-rate').onclick=()=>{const rates=[.5,.75,1,1.25,1.5,2];call('rate',rates[(rates.indexOf(state.rate)+1)%rates.length]);};
   $('apple-progress').oninput=e=>{progressDrag=true;e.target.style.setProperty('--played',e.target.value/10+'%');};$('apple-progress').onchange=e=>{progressDrag=false;call('seek',(state.duration||0)*e.target.value/1000);};
-  $('apple-settings').onclick=e=>toggleGoo(undefined,e.detail===0);$('video-settings-close').onclick=()=>{menu(false);toggleGoo(true);};$('native-close').onclick=()=>call('hide');
+  $('apple-settings').onclick=e=>toggleGoo(undefined,e.detail===0);$('video-settings-close').onclick=()=>{menu(false);toggleGoo(true);};$('native-close').onclick=()=>call('close');
   // Native cursor tracking decides when the pointer leaves the entire window.
   // A bubbling child pointerleave must not close the menu while moving between buttons.
   for(const type of ['click','pointerdown','pointerup','input','change'])ui.addEventListener(type,e=>e.stopPropagation());
   // Ctrl reveals these controls, so handle the wheel before browser zoom or
   // YouTube's page handlers can consume it. Keep scrolling inside the panel.
   window.addEventListener('wheel',e=>{
-    const panel=e.target.closest?.('#moro-ui .goo-settings-panel,#moro-ui .video-settings');
+    const panel=e.target.closest?.('#moro-ui .goo-settings-panel,#moro-ui .video-settings,#moro-ui .goo-url-panel');
     if(!panel||panel.hidden||!ui.classList.contains('ctrl-held'))return;
     e.preventDefault();e.stopImmediatePropagation();
-    const scroller=panel.querySelector('.goo-settings-body')||panel;
+    const scroller=e.target.closest?.('.history-list')||panel.querySelector('.goo-settings-body')||panel;
     const unit=e.deltaMode===1?18:e.deltaMode===2?scroller.clientHeight:1;
-    scroller.scrollTop+=e.deltaY*unit;scroller.scrollLeft+=e.deltaX*unit;
+    const before=scroller.scrollTop;scroller.scrollTop+=e.deltaY*unit;scroller.scrollLeft+=e.deltaX*unit;if(scroller!==panel&&scroller.scrollTop===before)panel.scrollTop+=e.deltaY*unit;
   },{capture:true,passive:false});
   window.addEventListener('click',e=>{if(e.target.closest('button,input,a,select,textarea,[role=button],.ytp-ad-overlay-container'))return;e.preventDefault();e.stopImmediatePropagation();},true);
   window.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();toggleGoo(false);menu(false);return;}if(goo.contains(e.target)&&e.target.closest('.goo-control')&&ui.classList.contains('goo-open')){const target={ArrowLeft:'goo-link',ArrowUp:'goo-settings-toggle',ArrowRight:'goo-video-toggle',ArrowDown:'goo-toggle'}[e.key];if(target){e.preventDefault();e.stopImmediatePropagation();$(target).focus();return;}}if(e.target.closest('input,button'))return;if(['Space','ArrowLeft','ArrowRight'].includes(e.code)){e.preventDefault();e.stopImmediatePropagation();if(e.code==='Space')call('play');if(e.key==='ArrowLeft')call('seek',Math.max(0,(state.time||0)-10));if(e.key==='ArrowRight')call('seek',Math.min(state.duration||0,(state.time||0)+10));}},true);
