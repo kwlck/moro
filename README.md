@@ -22,15 +22,9 @@ The [latest release](https://github.com/kwlck/moro/releases/latest) also include
 
 These are actual app captures of [Color Burst HDR Dolby Vision™ 12K 60FPS](https://www.youtube.com/watch?v=y9n6HkftavM), with **Tint at 20% and Blur at 4 px** (both sliders at minimum). The underlying video resolutions were checked before capture. Each image contains only the player window.
 
-### 0:13 · 480p · Compact window · Ctrl held
-
 ![Compact Moro window at 0:13 in 480p with controls visible](docs/01-compact-480p-ctrl.png)
 
-### 6:41 · 1080p · Large window · Ctrl held
-
 ![Large Moro window at 6:41 in 1080p with controls visible](docs/02-large-1080p-ctrl.png)
-
-### 7:44 · 1080p · Large window · Ctrl released
 
 ![Large Moro window at 7:44 in 1080p with controls hidden](docs/03-large-1080p-clean.png)
 
