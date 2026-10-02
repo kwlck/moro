@@ -1,6 +1,6 @@
 # Third party notices
 
-The Moro Noncommercial License applies to the original Moro software. It does not replace or restrict the separate licenses of the third-party materials listed below, the Electron runtime, or content played through YouTube.
+The PolyForm Noncommercial License 1.0.0 applies to the original Moro software. It does not replace or restrict the separate licenses of the third-party materials listed below, the Electron runtime, or content played through YouTube.
 
 ## Lucide SVG icons
 

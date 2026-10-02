@@ -1,84 +1,131 @@
-Moro Noncommercial License 1.0
+# PolyForm Noncommercial License 1.0.0
 
-Copyright (c) 2026 kwlck. All rights reserved.
+<https://polyformproject.org/licenses/noncommercial/1.0.0>
 
-1. Scope and acceptance
+## Acceptance
 
-This license applies to the original Moro source code, application binaries,
-documentation, and original assets made available by the copyright holder
-(the Licensor), to the extent the Licensor holds the relevant rights (the
-Software). Exercising rights granted by this license requires compliance
-with all its terms.
+In order to get any license under these terms, you must agree
+to them as both strict obligations and conditions to all
+your licenses.
 
-Third-party components, icons, media, and other materials are excluded from
-this license and remain subject to their respective rights and licenses.
-This includes third-party content displayed by the application. See
-THIRD_PARTY_NOTICES.md and the notices accompanying the runtime.
+## Copyright License
 
-2. Free noncommercial use
+The licensor grants you a copyright license for the
+software to do everything you might do with the software
+that would otherwise infringe the licensor's copyright
+in it for any permitted purpose.  However, you may
+only distribute the software according to [Distribution
+License](#distribution-license) and make changes or new works
+based on the software according to [Changes and New Works
+License](#changes-and-new-works-license).
 
-Subject to these terms, the Licensor grants you a worldwide, nonexclusive,
-royalty-free copyright license to use, run, study, copy, compile, and modify
-the Software, and to create works based on it, solely for noncommercial
-purposes. No payment to the Licensor is required for permitted use.
+## Distribution License
 
-Noncommercial means a purpose not primarily intended for or directed toward
-commercial advantage or monetary compensation. Personal entertainment,
-private study, hobby projects, and unpaid noncommercial research are
-permitted. Use in a business's commercial operations, paid client work,
-or a revenue-generating product or service is not permitted.
+The licensor grants you an additional copyright license
+to distribute copies of the software.  Your license
+to distribute covers distributing the software with
+changes and new works permitted by [Changes and New Works
+License](#changes-and-new-works-license).
 
-3. Free redistribution and modified versions
+## Notices
 
-You may redistribute the Software, including modified versions and works
-containing portions of it, only free of charge and solely for noncommercial
-purposes. Each recipient must receive this license, the copyright notice,
-and all applicable third-party notices. You must identify modifications
-and must not represent a modified version as an official Moro release.
+You must ensure that anyone who gets a copy of any part of
+the software from you also gets a copy of these terms or the
+URL for them above, as well as copies of any plain-text lines
+beginning with `Required Notice:` that the licensor provided
+with the software.  For example:
 
-These terms continue to apply to all portions of the Software in modified
-versions, forks, and derivative works. You may not relicense those portions
-under terms permitting sale or commercial use, remove these restrictions,
-or grant rights to the Software that you do not have.
+> Required Notice: Copyright Yoyodyne, Inc. (http://example.com)
 
-4. Sale and commercial use are prohibited
+## Changes and New Works License
 
-Without a separate written license from the Licensor, you may not:
+The licensor grants you an additional copyright license to
+make changes and new works based on the software for any
+permitted purpose.
 
-- sell, rent, lease, or otherwise charge for the Software, access to it,
-  or a modified version containing it;
-- sublicense the Software for a fee;
-- use or distribute the Software for commercial purposes;
-- include the Software in a paid product, commercial bundle, paid service,
-  subscription, or other offering intended for commercial advantage;
-- monetize access to or distribution of the Software through advertising,
-  paywalls, or required payments described as donations.
+## Patent License
 
-Providing a copy at no charge does not make an otherwise commercial use
-permitted. Requests for separate commercial permission may be directed to
-the Licensor through https://github.com/kwlck/moro.
+The licensor grants you a patent license for the software that
+covers patent claims the licensor can license, or becomes able
+to license, that you would infringe by using the software.
 
-5. Reserved rights
+## Noncommercial Purposes
 
-No ownership, trademark rights, endorsement, or right to sublicense is
-granted. Rights not expressly granted are reserved. Nothing in this license
-limits rights or exceptions you have under applicable law independently
-of this license. The Licensor may offer the Software under separate terms.
+Any noncommercial purpose is a permitted purpose.
 
-6. Termination
+## Personal Uses
 
-Your rights under this license terminate automatically if you breach its
-terms. You must stop all use and distribution relying on this license.
-Rights granted to recipients who remain compliant are not terminated by
-your breach. Reinstatement requires written permission from the Licensor.
+Personal use for research, experiment, and testing for
+the benefit of public knowledge, personal study, private
+entertainment, hobby projects, amateur pursuits, or religious
+observance, without any anticipated commercial application,
+is use for a permitted purpose.
 
-7. Warranty and liability
+## Noncommercial Organizations
 
-TO THE EXTENT PERMITTED BY APPLICABLE LAW, THE SOFTWARE IS PROVIDED "AS IS",
-WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
-THE LICENSOR IS NOT LIABLE FOR DAMAGES ARISING FROM THE SOFTWARE OR ITS
-USE, INCLUDING LOSS OF DATA, PROFITS, OR BUSINESS, TO THE EXTENT SUCH
-LIABILITY MAY LAWFULLY BE EXCLUDED.
+Use by any charitable organization, educational institution,
+public research organization, public safety or health
+organization, environmental protection organization,
+or government institution is use for a permitted purpose
+regardless of the source of funding or obligations resulting
+from the funding.
 
-This is a custom noncommercial license.
+## Fair Use
+
+You may have "fair use" rights for the software under the
+law. These terms do not limit them.
+
+## No Other Rights
+
+These terms do not allow you to sublicense or transfer any of
+your licenses to anyone else, or prevent the licensor from
+granting licenses to anyone else.  These terms do not imply
+any other licenses.
+
+## Patent Defense
+
+If you make any written claim that the software infringes or
+contributes to infringement of any patent, your patent license
+for the software granted under these terms ends immediately. If
+your company makes such a claim, your patent license ends
+immediately for work on behalf of your company.
+
+## Violations
+
+The first time you are notified in writing that you have
+violated any of these terms, or done anything with the software
+not covered by your licenses, your licenses can nonetheless
+continue if you come into full compliance with these terms,
+and take practical steps to correct past violations, within
+32 days of receiving notice.  Otherwise, all your licenses
+end immediately.
+
+## No Liability
+
+***As far as the law allows, the software comes as is, without
+any warranty or condition, and the licensor will not be liable
+to you for any damages arising out of these terms or the use
+or nature of the software, under any kind of legal claim.***
+
+## Definitions
+
+The **licensor** is the individual or entity offering these
+terms, and the **software** is the software the licensor makes
+available under these terms.
+
+**You** refers to the individual or entity agreeing to these
+terms.
+
+**Your company** is any legal entity, sole proprietorship,
+or other kind of organization that you work for, plus all
+organizations that have control over, are under the control of,
+or are under common control with that organization.  **Control**
+means ownership of substantially all the assets of an entity,
+or the power to direct its management and policies by vote,
+contract, or otherwise.  Control can be direct or indirect.
+
+**Your licenses** are all the licenses granted to you for the
+software under these terms.
+
+**Use** means anything you do with the software requiring one
+of your licenses.

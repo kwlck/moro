@@ -1,4 +1,6 @@
 * text=auto
+LICENSE text eol=lf
+NOTICE text eol=lf
 *.js text eol=lf
 *.json text eol=lf
 *.html text eol=lf

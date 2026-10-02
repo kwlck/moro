@@ -28,5 +28,12 @@ if ((Get-FileHash -LiteralPath $packagedLicense).Hash -ne (Get-FileHash -Literal
     throw 'The packaged license is outdated. Run npm run package before building the installer.'
 }
 $version = (Get-Content -Raw -LiteralPath (Join-Path $appRoot 'package.json') | ConvertFrom-Json).version
+$packagedNotice = Join-Path $appRoot 'dist\Moro-win32-x64\MORO-NOTICE.txt'
+if (-not (Test-Path -LiteralPath $packagedNotice)) {
+    throw 'The packaged copyright notice is missing. Run npm run package before building the installer.'
+}
+if ((Get-FileHash -LiteralPath $packagedNotice).Hash -ne (Get-FileHash -LiteralPath (Join-Path $appRoot 'NOTICE')).Hash) {
+    throw 'The packaged copyright notice is outdated. Run npm run package before building the installer.'
+}
 & $CompilerPath "/DAppVersion=$version" (Join-Path $appRoot 'installer\Moro.iss')
 if ($LASTEXITCODE -ne 0) { throw 'Installer compilation failed.' }
