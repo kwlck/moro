@@ -1,18 +1,19 @@
 {
   "name": "moro",
   "productName": "Moro YouTube PiP",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "A compact YouTube picture-in-picture player for Windows",
   "private": true,
   "main": "main.js",
   "author": "Moro",
-  "license": "UNLICENSED",
+  "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "start": "npm run build:native && electron .",
     "test": "node --test test/*.test.js",
     "smoke": "npm run build:native && electron . --smoke-test --report outputs/smoke",
     "build:native": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/build-native.ps1",
     "package": "npm run build:native && electron-packager . Moro --platform=win32 --arch=x64 --out=dist --asar.unpack=**/native/*.exe --icon=assets/moro.ico --ignore=^/test --ignore=^/tools --ignore=^/README.md --ignore=^/dist --ignore=^/outputs --ignore=^/.git --ignore=^/.github --ignore=^/docs --ignore=^/installer",
+    "postpackage": "node tools/copy-license.cjs",
     "installer": "npm run package -- --overwrite && powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/build-installer.ps1",
     "build:ui": "python tools/build-ui.py"
   },

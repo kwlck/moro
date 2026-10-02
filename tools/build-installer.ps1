@@ -20,6 +20,13 @@ if (-not $CompilerPath -or -not (Test-Path -LiteralPath $CompilerPath)) {
 if (-not (Test-Path -LiteralPath (Join-Path $appRoot 'dist\Moro-win32-x64\Moro.exe'))) {
     throw 'Run npm run package before building the installer.'
 }
+$packagedLicense = Join-Path $appRoot 'dist\Moro-win32-x64\MORO-LICENSE.txt'
+if (-not (Test-Path -LiteralPath $packagedLicense)) {
+    throw 'The packaged license is missing. Run npm run package before building the installer.'
+}
+if ((Get-FileHash -LiteralPath $packagedLicense).Hash -ne (Get-FileHash -LiteralPath (Join-Path $appRoot 'LICENSE')).Hash) {
+    throw 'The packaged license is outdated. Run npm run package before building the installer.'
+}
 $version = (Get-Content -Raw -LiteralPath (Join-Path $appRoot 'package.json') | ConvertFrom-Json).version
 & $CompilerPath "/DAppVersion=$version" (Join-Path $appRoot 'installer\Moro.iss')
 if ($LASTEXITCODE -ne 0) { throw 'Installer compilation failed.' }

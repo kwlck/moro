@@ -1,0 +1,84 @@
+Moro Noncommercial License 1.0
+
+Copyright (c) 2026 kwlck. All rights reserved.
+
+1. Scope and acceptance
+
+This license applies to the original Moro source code, application binaries,
+documentation, and original assets made available by the copyright holder
+(the Licensor), to the extent the Licensor holds the relevant rights (the
+Software). Exercising rights granted by this license requires compliance
+with all its terms.
+
+Third-party components, icons, media, and other materials are excluded from
+this license and remain subject to their respective rights and licenses.
+This includes third-party content displayed by the application. See
+THIRD_PARTY_NOTICES.md and the notices accompanying the runtime.
+
+2. Free noncommercial use
+
+Subject to these terms, the Licensor grants you a worldwide, nonexclusive,
+royalty-free copyright license to use, run, study, copy, compile, and modify
+the Software, and to create works based on it, solely for noncommercial
+purposes. No payment to the Licensor is required for permitted use.
+
+Noncommercial means a purpose not primarily intended for or directed toward
+commercial advantage or monetary compensation. Personal entertainment,
+private study, hobby projects, and unpaid noncommercial research are
+permitted. Use in a business's commercial operations, paid client work,
+or a revenue-generating product or service is not permitted.
+
+3. Free redistribution and modified versions
+
+You may redistribute the Software, including modified versions and works
+containing portions of it, only free of charge and solely for noncommercial
+purposes. Each recipient must receive this license, the copyright notice,
+and all applicable third-party notices. You must identify modifications
+and must not represent a modified version as an official Moro release.
+
+These terms continue to apply to all portions of the Software in modified
+versions, forks, and derivative works. You may not relicense those portions
+under terms permitting sale or commercial use, remove these restrictions,
+or grant rights to the Software that you do not have.
+
+4. Sale and commercial use are prohibited
+
+Without a separate written license from the Licensor, you may not:
+
+- sell, rent, lease, or otherwise charge for the Software, access to it,
+  or a modified version containing it;
+- sublicense the Software for a fee;
+- use or distribute the Software for commercial purposes;
+- include the Software in a paid product, commercial bundle, paid service,
+  subscription, or other offering intended for commercial advantage;
+- monetize access to or distribution of the Software through advertising,
+  paywalls, or required payments described as donations.
+
+Providing a copy at no charge does not make an otherwise commercial use
+permitted. Requests for separate commercial permission may be directed to
+the Licensor through https://github.com/kwlck/moro.
+
+5. Reserved rights
+
+No ownership, trademark rights, endorsement, or right to sublicense is
+granted. Rights not expressly granted are reserved. Nothing in this license
+limits rights or exceptions you have under applicable law independently
+of this license. The Licensor may offer the Software under separate terms.
+
+6. Termination
+
+Your rights under this license terminate automatically if you breach its
+terms. You must stop all use and distribution relying on this license.
+Rights granted to recipients who remain compliant are not terminated by
+your breach. Reinstatement requires written permission from the Licensor.
+
+7. Warranty and liability
+
+TO THE EXTENT PERMITTED BY APPLICABLE LAW, THE SOFTWARE IS PROVIDED "AS IS",
+WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+THE LICENSOR IS NOT LIABLE FOR DAMAGES ARISING FROM THE SOFTWARE OR ITS
+USE, INCLUDING LOSS OF DATA, PROFITS, OR BUSINESS, TO THE EXTENT SUCH
+LIABILITY MAY LAWFULLY BE EXCLUDED.
+
+This is a custom noncommercial license.

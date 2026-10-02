@@ -2,11 +2,13 @@
 
 A floating YouTube player for Windows. Keep a video visible while you work in other apps.
 
+**Free for noncommercial use.** [License terms](LICENSE).
+
 ## Install
 
 **Windows 10/11 x64.**
 
-1. Download the **[Windows installer](https://github.com/kwlck/moro/releases/download/v0.1.10/Moro-0.1.10-Setup.exe)**.
+1. Download the **[Windows installer](https://github.com/kwlck/moro/releases/download/v0.1.11/Moro-0.1.11-Setup.exe)**.
 2. Open it and click **Install → Finish**. Leave **Launch Moro — YouTube PiP** selected.
 3. Paste a YouTube link into the form and press **Enter**.
 
@@ -105,4 +107,6 @@ The smoke check exercises demo playback, controls, menus, window settings, nativ
 
 ## License and security
 
-Project code is **UNLICENSED**. Third-party licenses are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). See [SECURITY.md](SECURITY.md) for security reporting.
+Moro is **free for noncommercial use** under the [Moro Noncommercial License 1.0](LICENSE). You may use, modify, and share it free of charge for noncommercial purposes. **Selling Moro or using it commercially is prohibited**, including modified versions and forks containing Moro code, unless you obtain separate written permission from the copyright holder.
+
+Third-party components retain their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). See [SECURITY.md](SECURITY.md) for security reporting.
