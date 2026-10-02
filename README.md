@@ -8,7 +8,7 @@ A floating YouTube player for Windows. Keep a video visible while you work in ot
 
 **Windows 10/11 x64.**
 
-1. Download the **[Windows installer](https://github.com/kwlck/moro/releases/download/v0.1.13/Moro-0.1.13-Setup.exe)**.
+1. Download the **[Windows installer](https://github.com/kwlck/moro/releases/download/v0.1.14/Moro-0.1.14-Setup.exe)**.
 2. Open it and click **Install → Finish**. Leave **Launch Moro — YouTube PiP** selected.
 3. Paste a YouTube link into the form and press **Enter**.
 

@@ -1,7 +1,7 @@
 {
   "name": "moro",
   "productName": "Moro YouTube PiP",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "A compact YouTube picture-in-picture player for Windows",
   "private": true,
   "main": "main.js",

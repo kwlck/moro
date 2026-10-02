@@ -72,6 +72,16 @@ window.addEventListener('DOMContentLoaded',async()=>{
   // Native cursor tracking decides when the pointer leaves the entire window.
   // A bubbling child pointerleave must not close the menu while moving between buttons.
   for(const type of ['click','pointerdown','pointerup','input','change'])ui.addEventListener(type,e=>e.stopPropagation());
+  // Ctrl reveals these controls, so handle the wheel before browser zoom or
+  // YouTube's page handlers can consume it. Keep scrolling inside the panel.
+  window.addEventListener('wheel',e=>{
+    const panel=e.target.closest?.('#moro-ui .goo-settings-panel,#moro-ui .video-settings');
+    if(!panel||panel.hidden||!ui.classList.contains('ctrl-held'))return;
+    e.preventDefault();e.stopImmediatePropagation();
+    const scroller=panel.querySelector('.goo-settings-body')||panel;
+    const unit=e.deltaMode===1?18:e.deltaMode===2?scroller.clientHeight:1;
+    scroller.scrollTop+=e.deltaY*unit;scroller.scrollLeft+=e.deltaX*unit;
+  },{capture:true,passive:false});
   window.addEventListener('click',e=>{if(e.target.closest('button,input,a,select,textarea,[role=button],.ytp-ad-overlay-container'))return;e.preventDefault();e.stopImmediatePropagation();},true);
   window.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();toggleGoo(false);menu(false);return;}if(goo.contains(e.target)&&e.target.closest('.goo-control')&&ui.classList.contains('goo-open')){const target={ArrowLeft:'goo-link',ArrowUp:'goo-settings-toggle',ArrowRight:'goo-video-toggle',ArrowDown:'goo-toggle'}[e.key];if(target){e.preventDefault();e.stopImmediatePropagation();$(target).focus();return;}}if(e.target.closest('input,button'))return;if(['Space','ArrowLeft','ArrowRight'].includes(e.code)){e.preventDefault();e.stopImmediatePropagation();if(e.code==='Space')call('play');if(e.key==='ArrowLeft')call('seek',Math.max(0,(state.time||0)-10));if(e.key==='ArrowRight')call('seek',Math.min(state.duration||0,(state.time||0)+10));}},true);
   ipcRenderer.on('moro:settings',(_e,s)=>applySettings(s));ipcRenderer.on('moro:state',(_e,s)=>sync(s));ipcRenderer.on('moro:notice',(_e,text)=>message(text));ipcRenderer.on('moro:menu',()=>{ui.classList.add('hover');videoSettings();});ipcRenderer.on('moro:goo-open',(_e,name)=>{ui.classList.add('hover');toggleGoo(true);if(name==='url')panel('url');});ipcRenderer.on('moro:dragging',(_e,on)=>{document.body.classList.toggle('moro-dragging',on);if(on){toggleGoo(false);menu(false);}});
