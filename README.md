@@ -8,7 +8,7 @@ A floating YouTube player for Windows. Keep a video visible while you work in ot
 
 **Windows 10/11 x64.**
 
-1. Download the **[Windows installer](https://github.com/kwlck/moro/releases/download/v0.1.12/Moro-0.1.12-Setup.exe)**.
+1. Download the **[Windows installer](https://github.com/kwlck/moro/releases/download/v0.1.13/Moro-0.1.13-Setup.exe)**.
 2. Open it and click **Install → Finish**. Leave **Launch Moro — YouTube PiP** selected.
 3. Paste a YouTube link into the form and press **Enter**.
 
@@ -20,7 +20,7 @@ The installer creates a shortcut. No administrator rights or extra runtime insta
 
 - **Move the window:** keep Ctrl held and drag an empty area of the video.
 - **Click underneath:** release Ctrl. Clicks pass through to the app below the video.
-- **Settings:** hold Ctrl and open **…** to change video quality, audio, or window appearance.
+- **Settings:** hold Ctrl and open **…** to change video quality, audio, subtitles, or window appearance.
 - **Add another video:** click the Moro system tray icon or reopen the shortcut.
 - **Hide the video:** use the top-right **×** or the tray menu. To exit the app, choose **Quit Moro** in the tray menu.
 
@@ -37,6 +37,7 @@ The installer creates a shortcut. No administrator rights or extra runtime insta
 - A compact, rounded window that stays above other apps.
 - Translucent playback controls for play/pause, skipping, seeking, volume, and speed.
 - Video quality and audio selection when available for the video.
+- Subtitles on/off, with your preference saved between videos and launches.
 - Smooth resizing and magnetic snapping to screen edges and alignment points.
 
 ## Window settings

@@ -107,3 +107,7 @@ body.moro-dragging {cursor:grabbing!important}
 
 /* A fixed panel width keeps the size slider in the same place at every video size. */
 #moro-ui .goo-settings-panel {width:min(296px,calc(100vw - 24px))!important}
+
+/* Keep captions hidden during track changes and YouTube module reloads. */
+body.moro-captions-off .ytp-caption-window-container {display:none!important}
+#moro-ui .native-options button:disabled {opacity:.4;cursor:default}

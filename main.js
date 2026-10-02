@@ -112,7 +112,7 @@ async function createWindows(){
     if(!smoke&&!youtubeProbe)updateInteraction(cursor);
     if(!smoke&&!youtubeProbe)setDockVisible(!drag&&!spring);
   },30);
-  setInterval(async()=>{if(pollBusy||!validWindow(player)||player.webContents.isLoadingMainFrame())return;pollBusy=true;try{lastState=await operation('state');send(player,'moro:state',lastState);}catch{}finally{pollBusy=false;}},300);
+  setInterval(async()=>{if(pollBusy||!validWindow(player)||player.webContents.isLoadingMainFrame())return;pollBusy=true;try{lastState=await operation('state',{captions:settings.captions});send(player,'moro:state',lastState);}catch{}finally{pollBusy=false;}},300);
 }
 ipcMain.handle('moro:bootstrap',e=>trustedPlayer(e)?{kind,settings,css:playerCSS,tree:JSON.parse(fs.readFileSync(path.join(__dirname,'ui/overlay-tree.json'),'utf8'))}:null);
 ipcMain.on('moro:resize-tick',e=>{if(trustedPlayer(e))resizeStep?.();});
@@ -123,13 +123,14 @@ ipcMain.on('moro:controller-state',(e,open)=>{if(trustedController(e)){controlle
 ipcMain.handle('moro:player-action',async(e,action,value)=>{
   if(!trustedPlayer(e))return {ok:false};
   if(action==='hide'){setPlayerVisible(false);return {ok:true};}
-  if(!['play','seek','volume','mute','rate','quality','audio'].includes(action))return {ok:false};
+  if(!['play','seek','volume','mute','rate','quality','audio','captions'].includes(action))return {ok:false};
   if(action==='seek'&&(!Number.isFinite(value)||value<0||value>604800))return {ok:false};
   if(action==='volume'&&(!Number.isFinite(value)||value<0||value>100))return {ok:false};
   if(action==='rate'&&![.5,.75,1,1.25,1.5,2].includes(value))return {ok:false};
   if(action==='quality'){if(typeof value!=='string'||!['auto','tiny','small','medium','large','hd720','hd1080','hd1440','hd2160','highres','540','360'].includes(value))return {ok:false};if(kind==='demo')value={id:value,src:assets(value==='360'?'flower-360.mp4':'flower.mp4')};}
+  if(action==='captions'&&typeof value!=='boolean')return {ok:false};
   if(action==='audio'&&(typeof value!=='string'||value.length>256))return {ok:false};
-  try{return await operation(action,value);}catch{return {ok:false,message:'This action is not available yet'};}
+  try{const result=await operation(action,value);if(action==='captions'&&result.ok)applySettings({...settings,captions:value});return result;}catch{return {ok:false,message:'This action is not available yet'};}
 });
 ipcMain.handle('moro:control',async(e,action,value)=>{
   if(!trustedController(e)&&!trustedPlayer(e))return {ok:false};
