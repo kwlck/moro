@@ -1,12 +1,38 @@
-# Moro
+# Moro — YouTube PiP
 
 A compact floating YouTube player for Windows, with rounded corners, tinted glass controls, a liquid Gooey menu, and magnetic window snapping.
 
-![Moro player with tinted glass controls](docs/player.png)
+**Hold Ctrl over the video to reveal controls and interact with the window.** Release Ctrl to click through to the application underneath.
 
 ## Download
 
-Get the Windows x64 portable ZIP from [Releases](https://github.com/kwlck/moro/releases/latest). Extract the **entire folder** and run `Moro.exe`. Keep its supporting files beside it. Moro starts in the system tray.
+### Easy installation
+
+1. Download **[Moro-0.1.10-Setup.exe](https://github.com/kwlck/moro/releases/download/v0.1.10/Moro-0.1.10-Setup.exe)** for Windows 10/11 x64.
+2. Open it and click **Install**. It installs for your user and creates a Start menu shortcut; a desktop shortcut is selected by default. No administrator rights, Node.js, or extra runtime installation is required.
+3. Leave **Launch Moro — YouTube PiP** selected, click **Finish**, and paste a YouTube link into the compact form.
+
+To reopen link entry, use the **Moro YouTube PiP** shortcut or click its system tray icon. Uninstall from Windows **Settings → Apps**. No automatic startup is added.
+
+### Portable version
+
+The [latest release](https://github.com/kwlck/moro/releases/latest) also includes a Windows x64 ZIP. Extract the **entire folder** and run `Moro.exe`. Keep its supporting files beside it. The portable app starts in the system tray; click its icon to paste a link.
+
+## Screenshots
+
+These are actual app captures of [Color Burst HDR Dolby Vision™ 12K 60FPS](https://www.youtube.com/watch?v=y9n6HkftavM), with **Tint at 20% and Blur at 4 px** (both sliders at minimum). The underlying video resolutions were checked before capture. Each image contains only the player window.
+
+### 0:13 · 480p · Compact window · Ctrl held
+
+![Compact Moro window at 0:13 in 480p with controls visible](docs/01-compact-480p-ctrl.png)
+
+### 6:41 · 1080p · Large window · Ctrl held
+
+![Large Moro window at 6:41 in 1080p with controls visible](docs/02-large-1080p-ctrl.png)
+
+### 7:44 · 1080p · Large window · Ctrl released
+
+![Large Moro window at 7:44 in 1080p with controls hidden](docs/03-large-1080p-clean.png)
 
 ## Use
 
@@ -39,6 +65,14 @@ npm run package
 
 The output is `dist/Moro-win32-x64/`. The native motion helper is compiled from `native/MoroMotion.cs` and unpacked beside Electron's application archive.
 
+To build the installer, install [Inno Setup](https://jrsoftware.org/isdl.php) 6.7 or newer and run:
+
+```powershell
+npm run installer
+```
+
+The installer is written to `dist/installer/`. With a compiler in another location, first run `npm run package`, then run `tools/build-installer.ps1 -CompilerPath <path-to-ISCC.exe>` from PowerShell.
+
 The checked-in UI is ready to use. After editing `ui/overlay.html`, regenerate its trusted DOM tree with Python 3:
 
 ```powershell
@@ -60,7 +94,7 @@ Moro loads YouTube embeds and provides custom controls. Available qualities and 
 
 The application uses native Windows dragging and a compositor-paced motion helper. It stays above ordinary desktop windows and restores system hiding/minimization while the video is intentionally visible. Exclusive fullscreen applications, the Windows secure desktop, and other special system surfaces can still cover it.
 
-The portable release is unsigned.
+The installer and portable release are unsigned.
 
 ## Privacy and security
 
