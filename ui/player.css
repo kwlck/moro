@@ -112,22 +112,26 @@ body.moro-dragging {cursor:grabbing!important}
 body.moro-captions-off .ytp-caption-window-container {display:none!important}
 #moro-ui .native-options button:disabled {opacity:.4;cursor:default}
 
-/* History replaces the link form inside the same compact popover. */
+/* History uses the same single glass surface as the video settings. */
 .goo-url-panel {overflow-y:auto;overscroll-behavior:contain}
-.goo-url-actions {display:flex;align-items:center;gap:4px}
-.history-toggle {display:grid;place-items:center;width:28px;height:28px;padding:5px;border:0;border-radius:50%;background:transparent;color:inherit;cursor:pointer}
-.history-toggle svg {width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.goo-url-actions {display:flex;align-items:center;gap:6px}
 .history-back,.history-open .history-clock {display:none}
 .history-open .history-back {display:block}
-.history-open .goo-url-form,.history-open .goo-demo,.history-section[hidden] {display:none}
-.history-section {padding:6px 7px;border-radius:10px;background:rgba(17,17,20,.68)}
-.history-actions {display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 4px;font-size:11px;color:#e2e2e8}
-.history-clear {min-height:28px;padding:3px 8px;border:0;border-radius:8px;background:#ffffff0c;color:inherit;font:inherit;cursor:pointer}
-.history-clear:disabled {opacity:.4;cursor:default}
-.history-list {max-height:min(164px,calc(100vh - 124px));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#ffffff40 transparent}
-.history-entry {display:block;width:100%;min-height:46px;padding:8px 7px;border:0;border-radius:9px;background:transparent;color:#f2f2f6;font:inherit;text-align:left;cursor:pointer}
-.history-entry:hover,.history-clear:hover,.history-toggle:hover {background:#ffffff12}
-.history-title {display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:500;line-height:1.4}
-.history-detail {display:block;margin-top:3px;font-size:11px;line-height:1.4;color:#dfdfe5;font-variant-numeric:tabular-nums}
-.history-empty {margin:8px 7px;font-size:12px;line-height:1.5;color:#dfdfe5}
+.history-open .goo-url-form,.history-section[hidden] {display:none}
+.history-section {padding:0;background:transparent}
+.history-list {max-height:min(220px,calc(100vh - 84px));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#ffffff40 transparent}
+.history-entry {display:flex;align-items:center;gap:11px;width:100%;min-height:58px;padding:10px 6px;border:0;border-radius:8px;background:transparent;color:var(--moro-icon,#ededf2);font:inherit;text-align:left;cursor:pointer;transition:background .15s ease}
+.history-entry+.history-entry {border-top:1px solid #ffffff14;border-top-left-radius:0;border-top-right-radius:0}
+.history-entry:hover {background:#ffffff0d}
+.history-entry:active {background:#ffffff20}
+.history-entry:disabled {opacity:.55;cursor:wait}
+.history-play {flex:none;display:grid;place-items:center;width:25px;height:28px;color:inherit}
+.history-play svg {display:block;width:19px;height:19px;fill:currentColor;stroke:none;filter:drop-shadow(0 1px 2px #0006)}
+.history-copy {flex:1;min-width:0;text-shadow:0 1px 3px #0009}
+.history-title {display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:500;line-height:1.5}
+.history-detail {display:block;margin-top:2px;font-size:11px;line-height:1.4;color:inherit;opacity:.82;font-variant-numeric:tabular-nums}
+.history-empty {margin:0;padding:14px 3px 18px;font-size:12px;line-height:1.6;color:var(--moro-icon,#ededf2);text-shadow:0 1px 3px #0009}
+.history-empty strong {display:block;font-size:12px;font-weight:500}
+.history-empty span {display:block;margin-top:3px;font-size:11px;opacity:.82}
 #moro-ui .history-entry:focus-visible,#moro-ui .history-toggle:focus-visible,#moro-ui .history-clear:focus-visible {outline:0;box-shadow:inset 0 0 0 2px #ffffff80}
+.history-clear[hidden] {display:none!important}
